@@ -1,24 +1,38 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Axios from 'axios'
 
 import '../../App.css'
 
 export default function SignInPage() {
     const[userName,setUserName]=useState('')
     const[password,setPassword]=useState('')
+    const[errorMessage,setErrorMessage]=useState('')
 
     const navigate = useNavigate()
 
-    const submit =()=>{
+    const submit =(event)=>{
         // return Alert.alert(userName,password)
-        if(userName ==="admin@admin.com" && password ==="admin"){
-            alert(`Thank You ${userName}`)
-          navigate("/home")
-        } else{
-            alert(`UserName and password is not correct`)
-            navigate("/")
-        }
-    }
+    //     if(userName ==="admin@admin.com" && password ==="admin"){
+    //         alert(`Thank You ${userName}`)
+    //       navigate("/home")
+    //     } else{
+    //         alert(`UserName and password is not correct`)
+    //         navigate("/admin")
+    //     }
+  
+   
+        event.preventDefault()
+        Axios.get("http://127.0.0.1:8000/api/admin/login",{userName,password})
+        .then(response=>{
+         console.log(response.data)
+        }).catch(error=>{
+         setErrorMessage(error.message)
+        })
+       }
+    
+      
+     
 
     return (
         <div className="text-center m-5-auto">
@@ -26,7 +40,7 @@ export default function SignInPage() {
             <form action="/home">
                 <p>
                     <label>Username or email address</label><br/>
-                    <input type="text" name="first_name" required onChange={(e)=>{
+                    <input type="text" name="first_name" onChange={(e)=>{
           setUserName(e.target.value)
         }} />
                 </p>
@@ -39,7 +53,7 @@ export default function SignInPage() {
         }}/>
                 </p>
                 <p>
-                    <button id="sub_btn" type="submit" onClick={submit}>Login</button>
+                    <button id="sub_btn" onClick={submit}>Login</button>
                 </p>
             </form>
             <footer>

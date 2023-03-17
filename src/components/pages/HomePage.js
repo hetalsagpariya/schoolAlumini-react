@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 import Dashboard from '../Dashboard/Dashboard'
 import Navbar from '../Dashboard/Navbar'
 import Sidebar from '../Dashboard/Sidebar'
+import User from './User'
+import { Settings } from '@mui/icons-material'
+import '../../App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 export default function HomePage() {
     return (
@@ -17,5 +21,7 @@ export default function HomePage() {
              </div>
             </div>  
         </div>  
+
+
     )
 }

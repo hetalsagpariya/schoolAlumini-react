@@ -14,7 +14,7 @@ export default function App() {
             <>
                 <Routes>
                     <Route exact path="/" element={ <LandingPage/> } />
-                    <Route path="/login" element={ <LoginPage/> } />
+                    <Route path="/admin/login" element={ <LoginPage/> } />
                     <Route path="/home" element={ <HomePage/> } />
                     <Route path="/dashboard" element={ <Dashboard/> } />
                     </Routes>

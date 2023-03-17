@@ -10,7 +10,7 @@ export default function LandingPage() {
             <h1 className="main-title text-center">Alumani Management System </h1>
             <p className="main-para text-center">join us now and don't waste time</p>
             <div className="buttons text-center">
-                <Link to="/login">
+                <Link to="/admin/login">
                     <button className="primary-button">log in</button>
                 </Link>
               

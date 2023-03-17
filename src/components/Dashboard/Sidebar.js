@@ -1,31 +1,4 @@
-// import React from 'react'
-// import {Link} from 'react-router-dom'
-// const Sidebar = () => {
-//     return (
-//          <div className="col-md-3 col-lg-2 sidebar-offcanvas pl-0" id="sidebar" role="navigation" style={{backgroundColor:"#e9ecef"}}>
-//             <ul className="nav flex-column sticky-top pl-0 pt-5 p-3 mt-3 ">
-//                 <li className="nav-item mb-2 mt-3"><a className="nav-link text-secondary" href="#"><h5>DashBoard</h5></a></li>
-//                 <li className="nav-item mb-2 "><a className="nav-link text-secondary" href="#"><i className="fas fa-user font-weight-bold"></i> <span className="ml-3">Gallary</span></a></li>
-//                 <li className="nav-item mb-2">
-//                     <a className="nav-link text-secondary" href="#submenu1" data-toggle="collapse" data-target="#submenu1"><i className="far fa-file-word font-weight-bold"></i> <span className="ml-3"> Jobs</span></a>
-//                     <ul className="list-unstyled flex-column pl-3 collapse" id="submenu1" aria-expanded="false">
-//                        <li className="nav-item mb-2 "><a className="nav-link text-secondary" href=""><i className="fas fa-book-reader"></i></a></li>
-//                        <li className="nav-item mb-2 "><a className="nav-link text-secondary" href=""> <i className="fas fa-book-medical"></i></a></li>
-//                     </ul>
-//                 </li>
-//                 <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#"><i className="far fa-chart-bar font-weight-bold"></i> <span className="ml-3">Events</span></a></li>
-//                 <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#"><i className="fas fa-file-export font-weight-bold"></i><span className="ml-3">Users</span></a></li>
-//                 <li className="nav-item mb-2"><a className="nav-link text-secondary" href="#"><i className="fas fa-tablet-alt font-weight-bold"></i><span className="ml-3">Alumni</span></a></li>
-               
-//                 <li className="nav-item mb-2">
-//                   <Link className="nav-link text-secondary" to="/setting"><i className="far fa-folder font-weight-bold"></i> <span className="ml-3">Settings</span></Link></li>
-        
-//             </ul>
-//        </div>
-//     )
-// }
- 
-// export default Sidebar
+
 
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
@@ -50,6 +23,10 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import { Link, Route } from 'react-router-dom';
+import User from '../pages/User';
+import Alumni from '../pages/Alumni';
+import { Settings } from '@mui/icons-material';
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -100,6 +77,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [menudata, setMenudata] = React.useState("Setting");
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -194,50 +172,45 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Gallary', 'Alumni List', 'Jobs', 'Events','Users','Settings'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+         
+            <ListItem  disablePadding onClick={()=>setMenudata("User")}>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <MailIcon />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary="User" />
               </ListItemButton>
             </ListItem>
-          ))}
+            <ListItem  disablePadding  onClick={()=>setMenudata("Alumni")}>
+              <ListItemButton>
+                <ListItemIcon>
+                <MailIcon />
+                </ListItemIcon>
+                <ListItemText primary="Alumni" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem  disablePadding  onClick={()=>setMenudata("Setting")}>
+              <ListItemButton>
+                <ListItemIcon>
+                <MailIcon />
+                </ListItemIcon>
+                <ListItemText primary="Setting" />
+              </ListItemButton>
+            </ListItem>
+       
+       
         </List>
         <Divider />
       
       </Drawer>
-      <Main open={open}>
+      <Box components="main" sx={{ display: 'flex' }}>
+        {menudata =="User" && <User/>}
+        {menudata =="Alumni" && <Alumni/>}
+        {menudata =="Settings" && <Settings/>}
+        </Box>
+        <Main open={open}>
         <DrawerHeader />
-        {/* <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography> */}
-      </Main>
+        </Main>
     </Box>
   );
 }
